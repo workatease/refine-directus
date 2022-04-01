@@ -24,3 +24,6 @@ url: https://refine.dev/docs/examples/data-provider/directus/
 ## Notes
 To enable perform archive instead of delete with [**DeleteButton**](https://refine.dev/docs/ui-frameworks/antd/components/buttons/delete-button/#api-reference) pass metaData={deleteType:'archive'} in DeleteButton
 
+### difference From the actual Library
+- Removing hardcoded filter from the data provider only to give more flexibility 
+```status: { _neq: 'archived' }```
