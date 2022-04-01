@@ -93,8 +93,7 @@ export const dataProvider = (directusClient: any): DataProvider => ({
         let params: any = {
             search: paramsFilters.search,
             filter: {
-                ...paramsFilters.filters,
-                status: { _neq: 'archived' }
+                ...paramsFilters.filters
             },
             meta: '*',
             page: current,
@@ -123,8 +122,7 @@ export const dataProvider = (directusClient: any): DataProvider => ({
 
         let params: any = {
             filter: {
-                id: { _in: ids },
-                status: { _neq: 'archived' }
+                id: { _in: ids }
             },
             fields: ['*'],
             ...metaData
