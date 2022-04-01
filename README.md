@@ -27,3 +27,7 @@ To enable perform archive instead of delete with [**DeleteButton**](https://refi
 ### difference From the actual Library
 - Removing hardcoded filter from the data provider only to give more flexibility 
 ```status: { _neq: 'archived' }```
+
+# TODO
+- update directus sdk to latest version
+- 
