@@ -29,5 +29,8 @@ To enable perform archive instead of delete with [**DeleteButton**](https://refi
 ```status: { _neq: 'archived' }```
 
 # TODO
+- make changes packages JSON file package name change
 - update directus sdk to latest version
-- 
+- add auth provider
+- add live provider with help of extension in directus 9 link
+
