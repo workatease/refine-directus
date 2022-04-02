@@ -1,5 +1,6 @@
 import { CrudFilters, CrudSorting, DataProvider } from "@pankod/refine-core";
-
+import { IDirectus } from '@directus/sdk';
+import { CustomTypes } from "./helpers/interface";
 
 const operators = {
     eq: "_eq",
@@ -77,7 +78,7 @@ const generateFilter = (filters?: CrudFilters) => {
     return { search: search, filters: queryFilters };
 };
 
-export const dataProvider = (directusClient: any): DataProvider => ({
+export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvider => ({
     getList: async ({ resource, pagination, filters, sort, metaData }) => {
 
         const current = pagination?.current || 1;
