@@ -22,15 +22,20 @@ password: 123456<br />
 url: https://refine.dev/docs/examples/data-provider/directus/
 
 ## Notes
-To enable perform archive instead of delete with [**DeleteButton**](https://refine.dev/docs/ui-frameworks/antd/components/buttons/delete-button/#api-reference) pass metaData={deleteType:'archive'} in DeleteButton
+To enable perform archive instead of delete with [**DeleteButton**](https://refine.dev/docs/ui-frameworks/antd/components/buttons/delete-button/#api-reference) pass metaData={softDelete:true,field:value} in DeleteButton
+if no field is passed then default status will be used and set to archive
 
 ### difference From the actual Library
 - Removing hardcoded filter from the data provider only to give more flexibility 
 ```status: { _neq: 'archived' }```
-
+- ```or``` Query added to the data provider
 # TODO
 - ~~make changes packages JSON file package name change~~
 - ~~update directus sdk to latest version~~
-- add auth provider
+- ~~add auth provider~~
+- add upload utils without react dependency
 - add live provider with help of extension in directus 9 link
+- update examples files
+- automate intergration with directus server
+
 

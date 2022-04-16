@@ -1,0 +1,291 @@
+{
+    "data": [
+        {
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "post",
+                "data_type": "varchar",
+                "default_value": "draft",
+                "max_length": 255,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": false,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": null,
+                "foreign_key_table": null
+            },
+            "meta": {
+                "id": 16,
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "$t:published",
+                            "value": "published"
+                        },
+                        {
+                            "text": "$t:draft",
+                            "value": "draft"
+                        },
+                        {
+                            "text": "$t:archived",
+                            "value": "archived"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "$t:published",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "$t:draft",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        },
+                        {
+                            "text": "$t:archived",
+                            "value": "archived",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--warning)"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": null,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        },
+        {
+            "field": "user_created",
+            "type": "string",
+            "schema": {
+                "name": "user_created",
+                "table": "post",
+                "data_type": "char",
+                "default_value": null,
+                "max_length": 36,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": true,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": "id",
+                "foreign_key_table": "directus_users"
+            },
+            "meta": {
+                "id": 17,
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": null,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        },
+        {
+            "field": "date_created",
+            "type": "dateTime",
+            "schema": {
+                "name": "date_created",
+                "table": "post",
+                "data_type": "datetime",
+                "default_value": null,
+                "max_length": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": true,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": null,
+                "foreign_key_table": null
+            },
+            "meta": {
+                "id": 18,
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": null,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        },
+        {
+            "field": "user_updated",
+            "type": "string",
+            "schema": {
+                "name": "user_updated",
+                "table": "post",
+                "data_type": "char",
+                "default_value": null,
+                "max_length": 36,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": true,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": "id",
+                "foreign_key_table": "directus_users"
+            },
+            "meta": {
+                "id": 19,
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": null,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        },
+        {
+            "field": "date_updated",
+            "type": "dateTime",
+            "schema": {
+                "name": "date_updated",
+                "table": "post",
+                "data_type": "datetime",
+                "default_value": null,
+                "max_length": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": true,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": null,
+                "foreign_key_table": null
+            },
+            "meta": {
+                "id": 20,
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": null,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        },
+        {
+            "field": "title",
+            "type": "string",
+            "schema": {
+                "name": "title",
+                "table": "post",
+                "data_type": "varchar",
+                "default_value": null,
+                "max_length": 255,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_generated": false,
+                "generation_expression": null,
+                "is_nullable": true,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_column": null,
+                "foreign_key_table": null
+            },
+            "meta": {
+                "id": 21,
+                "field": "title",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": null,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null
+            }
+        }
+    ]
+}

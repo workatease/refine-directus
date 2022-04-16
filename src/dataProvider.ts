@@ -70,7 +70,18 @@ const generateFilter = (filters?: CrudFilters) => {
                     }
                 }
             } else {
-                // TODO: implement "or" operator filters for directus
+
+                const { value } = filter;
+                const queryOrFilters: { [key: string]: any } = {};
+                queryOrFilters['_or'] = [];
+                value.map((item, index) => {
+                    const { field, operator, value } = item;
+                    const directusOperator = operators[operator];
+                    let queryField = `${field}.${directusOperator}`;
+                    let filterObj = strToObj(queryField, value);
+                    queryOrFilters['_or'].push(filterObj);
+                });
+                queryFilters['_and'].push(queryOrFilters);
             }
         });
     }
@@ -114,7 +125,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            // throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -139,7 +151,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            //throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -161,7 +174,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            //throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -182,7 +196,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            //  throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -204,7 +219,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            //throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -212,13 +228,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         const directus = directusClient.items(resource);
 
-        let params: any = {
-            ...variables,
-            ...metaData
-        };
-
         try {
-            const response: any = await directus.createMany(params);
+            const response: any = await directus.createMany(variables);
 
             return {
                 data: response.data
@@ -226,7 +237,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            // throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
 
     },
@@ -247,7 +259,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            // throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -278,7 +291,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            // throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
@@ -307,7 +321,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         }
         catch (e) {
             console.log(e);
-            throw new Error(e.errors && e.errors[0] && e.errors[0].message);
+            throw e;
+            //throw new Error(e.errors && e.errors[0] && e.errors[0].message);
         }
     },
 
