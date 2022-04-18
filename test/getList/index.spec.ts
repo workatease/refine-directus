@@ -1,4 +1,3 @@
-import { SDK } from "@workatease/refine-directus8";
 import { dataProvider, ManyItems, ID } from "../../src/index";
 import client from "../directUsClient";
 
