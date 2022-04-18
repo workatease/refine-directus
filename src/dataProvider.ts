@@ -1,5 +1,5 @@
 import { CrudFilters, CrudSorting, DataProvider } from "@pankod/refine-core";
-import { IDirectus } from '@directus/sdk';
+import { IDirectus, QueryMany, QueryOne } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
 
 const operators = {
@@ -20,6 +20,8 @@ const operators = {
     between: "_between",
     nbetween: "_nbetween",
 };
+
+type Fields<T> = keyof T | (keyof T)[] | '*' | '*.*' | '*.*.*' | string | string[];
 
 
 const strToObj = (str: string, val: any) => {
@@ -74,11 +76,12 @@ const generateFilter = (filters?: CrudFilters) => {
                 const { value } = filter;
                 const queryOrFilters: { [key: string]: any } = {};
                 queryOrFilters['_or'] = [];
-                value.map((item, index) => {
+                value.map((item) => {
                     const { field, operator, value } = item;
                     const directusOperator = operators[operator];
                     let queryField = `${field}.${directusOperator}`;
                     let filterObj = strToObj(queryField, value);
+                    console.log(filterObj);
                     queryOrFilters['_or'].push(filterObj);
                 });
                 queryFilters['_and'].push(queryOrFilters);
@@ -101,7 +104,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const sortString: any = sort && sort.length > 0 ? _sort.join(",") : '-date_created';
 
         const directus = directusClient.items(resource);
-
+        console.log(paramsFilters);
         let params: any = {
             search: paramsFilters.search,
             filter: {
@@ -116,6 +119,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         };
 
         try {
+            console.log(params);
             const response: any = await directus.readByQuery(params);
 
             return {
@@ -134,19 +138,15 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         let params: any = {
-            filter: {
-                id: { _in: ids }
-            },
-            fields: ['*'],
             ...metaData
         };
 
         try {
-            const response: any = await directus.readByQuery(params);
+            const response: any = await directus.readMany(ids, params);
 
             return {
                 data: response.data,
-                total: response.meta.filter_count,
+                total: response?.meta?.filter_count,
             };
         }
         catch (e) {
@@ -268,22 +268,26 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         try {
-            if (metaData && metaData.deleteType === 'archive') {
-
-                let params: any = {
-                    status: 'archived',
-                    ...metaData
-                };
-
+            if (metaData && metaData.softDelete) {
+                delete metaData.softDelete;
+                let params: any = {}
+                if (Object.keys(metaData).length > 0) {
+                    params = {
+                        ...metaData
+                    }
+                } else {
+                    // if metaData is empty, then we need to set status to archived default behavior
+                    params = {
+                        status: 'archived'
+                    }
+                }
                 const response: any = await directus.updateOne(id, params);
-
                 return {
                     data: response
                 };
             }
             else {
                 const response: any = await directus.deleteOne(id);
-
                 return {
                     data: response
                 };
@@ -300,22 +304,30 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         try {
-            if (metaData && metaData.deleteType === 'archive') {
-                let params: any = {
-                    status: 'archived',
-                    ...metaData
-                };
+            if (metaData && metaData.softDelete) {
+                delete metaData.softDelete;
+                let params: any = {}
+                if (Object.keys(metaData).length > 0) {
+                    params = {
+                        ...metaData
+                    }
+                } else {
+                    // if metaData is empty, then we need to set status to archived default behavior
+                    params = {
+                        status: 'archived'
+                    }
+                }
                 const response: any = await directus.updateMany(ids, params);
 
                 return {
-                    data: response
+                    data: response.data
                 };
             }
             else {
                 const response: any = await directus.deleteMany(ids);
 
                 return {
-                    data: response.data
+                    data: response
                 };
             }
         }

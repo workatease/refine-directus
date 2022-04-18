@@ -18,6 +18,7 @@
     "start": "tsup --watch --dts --format esm,cjs,iife --legacy-output",
     "build": "tsup --dts --format esm,cjs,iife --minify --legacy-output",
     "test": "jest --passWithNoTests --runInBand",
+    "test-cov": "jest --passWithNoTests --runInBand --coverage",
     "prepare": "npm run build"
   },
   "author": "Pyll Gomez",
@@ -30,7 +31,7 @@
     "tsup": "^5.11.13"
   },
   "dependencies": {
-    "@directus/sdk": "^9.8.0",
+    "@directus/sdk": "^9.9.0",
     "@pankod/refine-core": "^3.9.0"
   },
   "publishConfig": {

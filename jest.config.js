@@ -8,5 +8,6 @@ module.exports = {
     resetMocks: true,
     globalSetup: "<rootDir>/test/jest.setup.ts",
     globalTeardown: "<rootDir>/test/jest.teardown.ts",
+    testSequencer: "<rootDir>/test/jest.sequencer.ts",
 
 };

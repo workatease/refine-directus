@@ -6,18 +6,34 @@ describe("updateMany", () => {
     it("correct response with metaData", async () => {
         const { data } = await dataProvider(client).updateMany({
             resource: "post",
-            ids: ["61b9dd4a6261d", "61b886fbd9398"],
+            ids: ["2", "3"],
             variables: {
-                content: "Batch updated content",
+                title: "Batch updated content",
             },
         });
+        expect(data[0].id).toEqual(2);
+        expect(data[0].title).toEqual("Batch updated content");
 
-        expect(data[0].id).toEqual("61b9dd4a6261d");
-        expect(data[0].title).toEqual("Updated Title");
-        expect(data[0].content).toEqual("Batch updated content");
+        expect(data[1].id).toEqual(3);
+        expect(data[1].title).toEqual("Batch updated content");
+    });
 
-        expect(data[1].id).toEqual("61b886fbd9398");
-        expect(data[1].title).toEqual("test");
-        expect(data[1].content).toEqual("Batch updated content");
+    it("throw error as id dont exists ", async () => {
+        expect.assertions(2);
+        try {
+            await dataProvider(client).updateMany({
+                resource: "unknown",
+                ids: ["2", "3"],
+                variables: {
+                    title: "Batch updated content",
+                },
+            });
+        } catch (error) {
+            expect(error).toBeInstanceOf(Error);
+            expect(error).toHaveProperty(
+                "message",
+                "You don't have permission to access this.",
+            );
+        }
     });
 });

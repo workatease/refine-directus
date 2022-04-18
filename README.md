@@ -2,17 +2,21 @@
 [**Directus**](https://directus.io/) dataprovider package for refine.
 
 ## About
+K
+A big thanks to [**Directus**](https://directus.io/) for providing the API and js SDK.
+and to @tspvivek for the initial implementation of the package.
 
 [**refine**](https://refine.dev/) offers lots of out-of-the box functionality for rapid development, without compromising extreme customizability. Use-cases include, but are not limited to *admin panels*, *B2B applications* and *dashboards*.
 
 ## Documentation
 
 For more detailed information and usage, refer to the [refine data provider documentation](https://refine.dev/docs/core/providers/data-provider).
+see below notes for more information.
 
 ## Install
 
 ```
-npm install @tspvivek/refine-directus
+npm install @workatease/refine-directus
 ```
 
 ## Example
@@ -21,14 +25,16 @@ username: demo@demo.com<br />
 password: 123456<br />
 url: https://refine.dev/docs/examples/data-provider/directus/
 
-## Notes
-To enable perform archive instead of delete with [**DeleteButton**](https://refine.dev/docs/ui-frameworks/antd/components/buttons/delete-button/#api-reference) pass metaData={softDelete:true,field:value} in DeleteButton
-if no field is passed then default status will be used and set to archive
 
-### difference From the actual Library
-- Removing hardcoded filter from the data provider only to give more flexibility 
+## Notes
+
+To enable perform archive instead of delete with [**DeleteButton**](https://refine.dev/docs/ui-frameworks/antd/components/buttons/delete-button/#api-reference) pass metaData={softDelete:true,field:value} in DeleteButton
+if no field is passed then default `status` field will be used and set to `archived`
+
+### difference From the [actual](https://www.npmjs.com/package/@tspvivek/refine-directus) Library
+- Removing hardcoded filter from the data provider flexibility 
 ```status: { _neq: 'archived' }```
-- ```or``` Query added to the data provider
+- ```or``` Query support added to the data provider
 # TODO
 - ~~make changes packages JSON file package name change~~
 - ~~update directus sdk to latest version~~
@@ -36,6 +42,6 @@ if no field is passed then default status will be used and set to archive
 - add upload utils without react dependency
 - add live provider with help of extension in directus 9 link
 - update examples files
-- automate intergration with directus server
+- automate integration with directus server
 
 

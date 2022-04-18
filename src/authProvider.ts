@@ -8,10 +8,10 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
 
             const response: AuthResult = await directus.auth.login({ email: username, password: password });
             return response.access_token;
-        } catch (e) {
-            console.log(e);
-            if (e instanceof Error) {
-                throw e;
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                throw error;
             }
             throw new Error("Invalid Email and password combination");
         }
