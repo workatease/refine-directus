@@ -1,6 +1,5 @@
-[![codecov](https://codecov.io/gh/workatease/refine-directus/branch/master/graph/badge.svg?token=UD27GSCVNA)](https://codecov.io/gh/workatease/refine-directus) [![build](https://github.com/workatease/refine-directus/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/workatease/refine-directus/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/workatease/refine-directus/branch/master/graph/badge.svg?token=UD27GSCVNA)](https://codecov.io/gh/workatease/refine-directus) [![build](https://github.com/workatease/refine-directus/workflows/build/badge.svg)](https://github.com/workatease/refine-directus/actions/workflows/ci.yml) 
 [![npm version](https://badge.fury.io/js/@workatease%2Frefine-directus.svg)](https://badge.fury.io/js/@workatease%2Frefine-directus)
-
 [**Directus**](https://directus.io/) dataprovider package for refine.
 
 ## About
