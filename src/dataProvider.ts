@@ -81,7 +81,6 @@ const generateFilter = (filters?: CrudFilters) => {
                     const directusOperator = operators[operator];
                     let queryField = `${field}.${directusOperator}`;
                     let filterObj = strToObj(queryField, value);
-                    console.log(filterObj);
                     queryOrFilters['_or'].push(filterObj);
                 });
                 queryFilters['_and'].push(queryOrFilters);
@@ -104,7 +103,6 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const sortString: any = sort && sort.length > 0 ? _sort.join(",") : '-date_created';
 
         const directus = directusClient.items(resource);
-        console.log(paramsFilters);
         let params: any = {
             search: paramsFilters.search,
             filter: {
@@ -119,7 +117,6 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         };
 
         try {
-            console.log(params);
             const response: any = await directus.readByQuery(params);
 
             return {
@@ -349,6 +346,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         let response: any;
         switch (method) {
+            // put method is not supported by directus but it is required if there is any custom endpoint hooks
             case "put":
                 response = await directusTransport.put(url, payload, { headers: headers, params: query });
                 break;
@@ -365,10 +363,10 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
                 response = await directusTransport.get(url, { headers: headers, params: query });
                 break;
         }
-
+        console.log(response);
         return {
             ...response,
-            data: response.data
+            data: response?.data
         };
 
     },

@@ -442,7 +442,7 @@ describe("updateMany", () => {
 });
 
 
-describe("deleteOne", () => {
+describe("delete", () => {
     beforeAll(async () => {
         const res = await client.items('post').createMany([{
             id: '60',
@@ -467,7 +467,7 @@ describe("deleteOne", () => {
                 softDelete: true,
             },
         });
-        console.log(data);
+
         expect(data.id).toBe(62);
         expect(data.title).toBe("post 62");
         expect(data.status).toBe("archived");
@@ -482,7 +482,7 @@ describe("deleteOne", () => {
                 status: "deleted",
             },
         });
-        console.log(data);
+
         expect(data.id).toBe(62);
         expect(data.title).toBe("post 62");
         expect(data.status).toBe("deleted");
@@ -496,7 +496,7 @@ describe("deleteOne", () => {
                 softDelete: true,
             },
         });
-        console.log(data);
+
         expect(data[0].id).toBe(61);
         expect(data[0].title).toBe("post 61");
         expect(data[0].status).toBe("archived");
@@ -506,18 +506,20 @@ describe("deleteOne", () => {
     });
 
     it("softDelete delete many custom", async () => {
-        const { data } = await dataProvider(client).deleteOne({
+        const { data } = await dataProvider(client).deleteMany({
             resource: "post",
-            id: "62",
+            ids: ["62", "61"],
             metaData: {
                 softDelete: true,
                 status: "deleted",
             },
         });
-        console.log(data);
-        expect(data.id).toBe(62);
-        expect(data.title).toBe("post 62");
-        expect(data.status).toBe("deleted");
+        expect(data[0].id).toBe(61);
+        expect(data[0].title).toBe("post 61");
+        expect(data[0].status).toBe("deleted");
+        expect(data[1].id).toBe(62);
+        expect(data[1].title).toBe("post 62");
+        expect(data[1].status).toBe("deleted");
     });
 
     // hard delete
@@ -569,4 +571,81 @@ describe("deleteOne", () => {
 
 
 
+});
+
+describe("custom", () => {
+    beforeAll(async () => {
+        await clearAllPosts();
+    });
+
+    it("custom post action", async () => {
+        const response = await dataProvider(client).custom!({
+            url: "items/post",
+            method: "post",
+            payload: {
+                id: "1",
+                title: "Test 1",
+            },
+        });
+
+        expect(response.data.id).toBe(1);
+        expect(response.data.title).toBe("Test 1");
+        expect(response.data.status).toBe("draft");
+        expect(response.data.date_created).toBeTruthy();
+        expect(response.data.user_created).toBeTruthy();
+        expect(response.data.date_updated).toBeNull();
+        expect(response.data.user_updated).toBeNull();
+    });
+
+    it("custom patch action", async () => {
+        const response = await dataProvider(client).custom!({
+            url: "items/post/1",
+            method: "patch",
+            payload: {
+
+                status: "published",
+
+            },
+        });
+
+        expect(response.data.id).toBe(1);
+        expect(response.data.title).toBe("Test 1");
+        expect(response.data.status).toBe("published");
+        expect(response.data.date_created).toBeTruthy();
+        expect(response.data.user_created).toBeTruthy();
+        expect(response.data.date_updated).toBeTruthy();
+        expect(response.data.user_updated).toBeTruthy();
+    });
+
+    it("get action", async () => {
+        const response = await dataProvider(client).custom!({
+            url: "items/post/1",
+            method: "get",
+            payload: {
+                status: "published",
+            },
+        });
+
+        expect(response.data.id).toBe(1);
+        expect(response.data.title).toBe("Test 1");
+        expect(response.data.status).toBe("published");
+        expect(response.data.date_created).toBeTruthy();
+        expect(response.data.user_created).toBeTruthy();
+        expect(response.data.date_updated).toBeTruthy();
+        expect(response.data.user_updated).toBeTruthy();
+    });
+
+    it("delete action", async () => {
+        const response = await dataProvider(client).custom!({
+            url: "items/post/1",
+            method: "delete",
+            payload: {
+                status: "published",
+            },
+        });
+        expect(response.data).toBe(undefined);
+    });
+
+
+    // TODO: test custom action for put with nock
 });

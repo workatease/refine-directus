@@ -10,22 +10,15 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
             return response.access_token;
         } catch (error) {
             console.log(error);
-            if (error instanceof Error) {
-                throw error;
-            }
-            throw new Error("Invalid Email and password combination");
+            throw error;
         }
     },
     logout: async () => {
         try {
-            await directus.auth.logout()
-            return;
+            return await directus.auth.logout()
         } catch (error) {
             console.log(error);
-            if (error instanceof Error) {
-                throw error;
-            }
-            return false;
+            throw error;
         }
     },
     checkError: (error) => {
@@ -39,16 +32,10 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
             const response = await directus.users.me.read()
             if (response) {
                 return Promise.resolve();
-            } else {
-                return Promise.reject();
             }
         } catch (error) {
             console.log(error);
-            if (error instanceof Error) {
-                return Promise.reject(error);
-            }
-            return Promise.reject(new Error("unable to check auth"));
-
+            return Promise.reject(error);
         }
     },
     getPermissions: async () => {
@@ -57,21 +44,15 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
             return Promise.resolve(response);
         } catch (error) {
             console.log(error);
-            if (error instanceof Error) {
-                return Promise.reject(error);
-            }
-            return Promise.reject(new Error("unable to get permissions"));
+            return Promise.reject(error);
         }
     },
     getUserIdentity: async () => {
         try {
-            return directus.users.me.read()
+            return await directus.users.me.read()
         } catch (error) {
             console.log(error);
-            if (error instanceof Error) {
-                return Promise.reject(error);
-            }
-            return Promise.reject();
+            return Promise.reject(error);
         }
     },
 });

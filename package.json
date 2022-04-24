@@ -25,14 +25,17 @@
   "module": "dist/refine-directus.esm.js",
   "devDependencies": {
     "@types/jest": "^27.4.1",
+    "@types/jsonwebtoken": "^8.5.8",
     "jest": "^27.5.1",
+    "jsonwebtoken": "^8.5.1",
     "ts-jest": "^27.1.4",
     "tslib": "^2.3.1",
     "tsup": "^5.11.13"
   },
   "dependencies": {
     "@directus/sdk": "^9.9.0",
-    "@pankod/refine-core": "^3.9.0"
+    "@pankod/refine-core": "^3.9.0",
+    "cookies-js": "^1.2.3"
   },
   "publishConfig": {
     "access": "public"
