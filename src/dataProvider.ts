@@ -100,7 +100,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const _sort = generateSort(sort);
         const paramsFilters = generateFilter(filters);
 
-        const sortString: any = sort && sort.length > 0 ? _sort.join(",") : '-date_created';
+        const sortString: any = sort && sort.length > 0 ? _sort.join(",") : '';
 
         const directus = directusClient.items(resource);
         let params: any = {
@@ -111,10 +111,12 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
             meta: '*',
             page: current,
             limit: pageSize,
-            sort: sortString,
             fields: ['*'],
             ...metaData
         };
+        if (sortString !== '') {
+            params.sort = sortString;
+        }
 
         try {
             const response: any = await directus.readByQuery(params);
