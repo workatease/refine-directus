@@ -1,12 +1,15 @@
 [![codecov](https://codecov.io/gh/workatease/refine-directus/branch/master/graph/badge.svg?token=UD27GSCVNA)](https://codecov.io/gh/workatease/refine-directus) [![build](https://github.com/workatease/refine-directus/workflows/build/badge.svg)](https://github.com/workatease/refine-directus/actions/workflows/ci.yml) 
 [![npm version](https://badge.fury.io/js/@workatease%2Frefine-directus.svg)](https://badge.fury.io/js/@workatease%2Frefine-directus)
-[**Directus**](https://directus.io/) dataprovider package for refine.
+
+# [**Directus**](https://directus.io/) dataprovider package for refine.
 
 ## About
-A big thanks to [**Directus**](https://directus.io/) for providing the API and js SDK.
-and to @tspvivek for the initial implementation of the package.
 
 [**refine**](https://refine.dev/) offers lots of out-of-the box functionality for rapid development, without compromising extreme customizability. Use-cases include, but are not limited to *admin panels*, *B2B applications* and *dashboards*.
+
+
+A big thanks to [**Directus**](https://directus.io/) for providing the API and js SDK and to @tspvivek for the initial implementation of the package.
+
 
 ## Documentation
 
@@ -45,6 +48,25 @@ example:
     recordItemId={record.id}
     metaData={{ softDelete: true, isDeleted: "true" }}
 />
+```
+
+## usage
+    
+   App.tsx 
+   ``` 
+    import { Directus, authProvider,dataProvider } from '@workatease/refine-directus';
+    function App() {
+    const directus = new Directus<MyCollections>("https://url");
+
+    return (
+     <Refine 
+      routerProvider={routerProvider}
+      dataProvider={dataProvider(directus)}
+      authProvider={authProvider(directus)}  // optional - can use your own auth provider
+      ...
+    />
+    );
+    }
 ```
 
 ## Tests
