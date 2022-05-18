@@ -40,7 +40,7 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@directus/sdk": "^9.9.0",
+    "@directus/sdk": "^9.9.1",
     "@pankod/refine-core": "3.14.2",
     "tslib": "^2.3.1"
   },
