@@ -183,7 +183,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         let params: any = {
             ...variables,
-            ...metaData
+            ...metaData,
+            fields: undefined
         };
 
         try {
@@ -206,7 +207,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         let params: any = {
             ...variables,
-            ...metaData
+            ...metaData,
+            fields: undefined
         };
 
         try {
