@@ -1,5 +1,5 @@
 import { CrudFilters, CrudSorting, DataProvider } from "@pankod/refine-core";
-import { IDirectus, QueryMany, QueryOne } from '@directus/sdk';
+import { IDirectus } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
 
 const operators = {
@@ -183,7 +183,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         let params: any = {
             ...variables,
-            ...metaData
+            ...metaData,
+            fields: undefined
         };
 
         try {
@@ -206,7 +207,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
         let params: any = {
             ...variables,
-            ...metaData
+            ...metaData,
+            fields: undefined
         };
 
         try {

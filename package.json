@@ -1,7 +1,7 @@
 {
   "name": "@workatease/refine-directus",
   "description": "Refine Directus REST data provider. This is a wrapper around the Directus SDK to use in refine.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -40,9 +40,9 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@directus/sdk": "^9.9.0",
+    "@directus/sdk": "^9.11.0",
     "@pankod/refine-core": "3.16.2",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "publishConfig": {
     "access": "public"
