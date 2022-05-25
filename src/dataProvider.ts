@@ -123,7 +123,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
 
             return {
                 data: response.data,
-                total: response.meta.filter_count,
+                total: response?.meta?.filter_count,
             };
         }
         catch (e) {

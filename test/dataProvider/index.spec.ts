@@ -172,6 +172,17 @@ describe("getList", () => {
         ]))
         expect(res.total).toBe(3);
     });
+    it("correct without meta", async () => {
+        const res = await dataProvider(client).getList({
+            resource: "post", metaData: { meta: undefined }
+        });
+        expect(res.data).toEqual(expect.arrayContaining([
+            expect.objectContaining({ id: 80, title: "Test 1" }),
+            expect.objectContaining({ id: 82, title: "not this" }),
+            expect.objectContaining({ id: 81, title: "Test 2" }),
+        ]))
+        expect(res.total).toBe(undefined);
+    });
 
     it("correct sorting response", async () => {
         const { data, total } = await dataProvider(client).getList({
