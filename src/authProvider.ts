@@ -3,11 +3,11 @@ import { AuthResult, IDirectus } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
 
 export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => ({
-    login: async ({ username, password }) => {
+    login: async ({ username, password, redirectPath }) => {
         try {
 
             const response: AuthResult = await directus.auth.login({ email: username, password: password });
-            return response.access_token;
+            return redirectPath ? redirectPath : response.access_token;
         } catch (error) {
             console.log(error);
             throw error;
