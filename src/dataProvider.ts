@@ -1,8 +1,15 @@
-import { CrudFilters, CrudSorting, DataProvider } from "@pankod/refine-core";
+import { CrudFilters, CrudSorting, DataProvider,CrudOperators } from "@pankod/refine-core";
 import { IDirectus } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
+type DirectusFilterOperators='_eq'|'_neq'|
+    '_gt'|'_gte'|'_lt'|'_lte'|
+    '_in'| '_nin'|'_between'|'_nbetween'|
+    '_contains'| '_ncontains'|
+    '_starts_with'|'_nstarts_with'|'_ends_with'| '_nends_with'|
+    '_empty'|'_nempty'|'_nnull'|'_null'|
+    '_intersects'|'_nintersects'| '_intersects_bbox'|'_nintersects_bbox';
 
-const operators = {
+const operators: Record<CrudOperators, DirectusFilterOperators | undefined>= {
     eq: "_eq",
     ne: "_neq",
     lt: "_lt",
@@ -19,6 +26,12 @@ const operators = {
     nnull: "_nnull",
     between: "_between",
     nbetween: "_nbetween",
+    startswith: "_starts_with",
+    nstartswith: "_nstarts_with",
+    endswith: "_ends_with",
+    nendswith: "_nends_with",startswiths:undefined,
+    nstartswiths:undefined, endswiths:undefined, nendswiths:undefined,
+    or:undefined,
 };
 
 type Fields<T> = keyof T | (keyof T)[] | '*' | '*.*' | '*.*.*' | string | string[];
@@ -230,7 +243,11 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         try {
-            const response: any = await directus.createMany(variables);
+            let items: any[] = [...variables];
+            let params: any = {
+                ...metaData
+            };
+            const response: any = await directus.createMany(items, params);
 
             return {
                 data: response.data

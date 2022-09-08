@@ -1,7 +1,7 @@
 import { Directus } from "@directus/sdk";
 
-const url = "https://2befv7yw.directus.app/"
-const directus = new Directus(url, { auth: { staticToken: 'QUM5T15SdxPtzJPch04Qg76TQIXpFBIM' } });
+const url = "https://h2cwcduj.directus.app/"
+const directus = new Directus(url, { auth: { staticToken: 'sF2hHnMacG4qigKctYJ12pg2PrHocmz5' } });
 
 const noAuthDirectus = new Directus(url);
 

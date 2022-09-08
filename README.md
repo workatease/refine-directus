@@ -88,3 +88,18 @@ example:
 - ~~automate integration with directus server~~
 
 
+### Changesets
+----------------
+#### 1.0.9
+
+- update library version
+  - "@directus/sdk": "^10.1.4"
+  - "@pankod/refine-core": "3.69.0"
+- now support filter startwith, endswith, nstartswith, nendswith
+
+----------------
+#### 1.0.8
+
+- Data provider will support soft delete with metaData={softDelete:true,field:value} in DeleteButton
+- Default AuthProvider added to the package
+ 

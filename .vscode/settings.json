@@ -1,3 +1,11 @@
 {
-    "jest.jestCommandLine": "npm run test-cov --"
+    "jest.jestCommandLine": "npm run test-cov --",
+    "cSpell.words": [
+        "endswith",
+        "nends",
+        "nendswith",
+        "nstarts",
+        "nstartswith",
+        "startswith"
+    ]
 }

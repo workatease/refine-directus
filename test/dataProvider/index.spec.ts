@@ -23,7 +23,7 @@ describe("create", () => {
         expect(data.id).toBeTruthy();
     });
 
-    it("throw error as id dont exists ", async () => {
+    it("throw error as id don't exists ", async () => {
         expect.assertions(2);
         try {
             const { data } = await dataProvider(client).create({
@@ -221,6 +221,36 @@ describe("getList", () => {
         expect(data[0].id).toBe(80);
         expect(data[0].title).toBe("Test 1");
         expect(total).toBe(1);
+    });
+
+    it("correct filter response with contains", async () => {
+        await client.items('post').createMany([
+            {
+                id: "71",
+                title: "Test 71",
+            },
+            {
+                id: "810",
+                title: "Test 810",
+            }
+        ]);
+
+        const { data, total } = await dataProvider(client).getList({
+            resource: "post",
+            filters: [
+                {
+                    field: "id",
+                    operator: "gte",
+                    value: "81",
+                },
+            ],
+        });
+
+        expect(data[0].id).toBe(81);
+        expect(data[0].title).toBe("Test 2");
+        expect(data[1].id).toBe(82);
+        expect(data[1].title).toBe("not this");
+        expect(total).toBe(3);
     });
 
     it("search query", async () => {

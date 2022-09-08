@@ -68,7 +68,7 @@ describe("authProvider", () => {
         const { data } = response;
         expect(data).toBeInstanceOf(Array);
         expect(data.length).toBeGreaterThan(0);
-        expect(data[0]).toHaveProperty("id");
+        expect(data[0]).toHaveProperty("role");
     });
 
 
