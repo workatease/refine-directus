@@ -89,6 +89,9 @@ example:
 
 
 ### Changesets
+
+#### 1.0.10
+- Added rnd value to the url to avoid caching issue
 ----------------
 #### 1.0.9
 

@@ -125,6 +125,7 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
             page: current,
             limit: pageSize,
             fields: ['*'],
+            rnd:JSON.stringify(new Date().getTime()),
             ...metaData
         };
         if (sortString !== '') {
@@ -150,7 +151,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         let params: any = {
-            ...metaData
+            ...metaData,
+            rnd:JSON.stringify(new Date().getTime()),
         };
 
         try {
@@ -265,7 +267,8 @@ export const dataProvider = (directusClient: IDirectus<CustomTypes>): DataProvid
         const directus = directusClient.items(resource);
 
         let params: any = {
-            ...metaData
+            ...metaData,
+            rnd:JSON.stringify(new Date().getTime()),
         };
 
         try {
