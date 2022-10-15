@@ -5,9 +5,11 @@ import { CustomTypes } from "./helpers/interface";
 export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => ({
     login: async ({ username, password, redirectPath }) => {
         try {
-
-            const response: AuthResult = await directus.auth.login({ email: username, password: password });
-            return redirectPath ? redirectPath : response.access_token;
+            await directus.auth.login({
+                email: username,
+                password: password,
+            });
+            if (redirectPath) return redirectPath;
         } catch (error) {
             console.log(error);
             throw error;
@@ -15,7 +17,7 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
     },
     logout: async () => {
         try {
-            return await directus.auth.logout()
+            return await directus.auth.logout();
         } catch (error) {
             console.log(error);
             throw error;
