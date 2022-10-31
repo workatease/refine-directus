@@ -27,9 +27,13 @@ describe("authProvider", () => {
 
 
     it("checkError 403 resolves", async () => {
-        await expect(authProvider(noAuthDirectus).checkError({ status: 403 })).resolves.toBe(undefined);
+        await expect(authProvider(noAuthDirectus).checkError({ status: 403 })).rejects.toBe(undefined);
     });
 
+    it("checkError 500 resolves", async () => {
+        await expect(authProvider(noAuthDirectus).checkError({ status: 500 })).resolves.toBe(undefined);
+    });
+    
     it("checkAuth rejects", async () => {
         expect.assertions(1);
         try {

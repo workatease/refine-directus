@@ -22,14 +22,17 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
         }
     },
     checkError: (error) => {
-        if (error.status === 401) {
+        if (error.status === 401 || error.status === 403) {
             return Promise.reject();
         }
         return Promise.resolve();
     },
     checkAuth: async () => {
         try {
-            const response = await directus.users.me.read()
+            let params:any = {
+                rnd:JSON.stringify(new Date().getTime())
+            };
+            const response = await directus.users.me.read(params)
             if (response) {
                 return Promise.resolve();
             }
@@ -40,7 +43,10 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
     },
     getPermissions: async () => {
         try {
-            const response = await directus.permissions.readByQuery();
+            let params:any = {
+                rnd:JSON.stringify(new Date().getTime())
+            };
+            const response = await directus.permissions.readByQuery(params);
             return Promise.resolve(response);
         } catch (error) {
             console.log(error);
