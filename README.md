@@ -89,7 +89,9 @@ example:
 
 
 ### Changesets
-
+#### 1.0.11
+- Added rnd value to the url to avoid caching issue in Auth provider
+----------------
 #### 1.0.10
 - Added rnd value to the url to avoid caching issue
 ----------------

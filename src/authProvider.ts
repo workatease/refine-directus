@@ -55,7 +55,10 @@ export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => 
     },
     getUserIdentity: async () => {
         try {
-            return await directus.users.me.read()
+            let params:any = {
+                rnd:JSON.stringify(new Date().getTime())
+            };
+            return await directus.users.me.read(params)
         } catch (error) {
             console.log(error);
             return Promise.reject(error);
