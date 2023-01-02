@@ -2,7 +2,7 @@ import { AuthProvider } from "@pankod/refine-core";
 import { AuthResult, IDirectus } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
 
-export const authProvider = (directus: IDirectus<CustomTypes>,queryClient?:any ): AuthProvider => ({
+export const authProvider = (directus: IDirectus<CustomTypes>): AuthProvider => ({
     login: async ({ username, password, redirectPath }) => {
         try {
 
@@ -16,7 +16,6 @@ export const authProvider = (directus: IDirectus<CustomTypes>,queryClient?:any )
     logout: async () => {
         try {
             return await directus.auth.logout();
-            queryClient?.clear();
         } catch (error) {
             console.log(error);
             throw error;

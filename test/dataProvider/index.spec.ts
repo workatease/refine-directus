@@ -12,7 +12,7 @@ describe("create", () => {
         await clearAllPosts();
     });
     it("correct response with metaData", async () => {
-        const { data } = await dataProvider(client).create({
+        const { data } = await dataProvider(client)!.create({
             resource: "post",
             variables: {
                 id: "1",
@@ -50,7 +50,7 @@ describe("createMany", () => {
         await clearAllPosts();
     });
     it("correct response", async () => {
-        const { data } = await dataProvider(client).createMany({
+        const { data } = await dataProvider(client).createMany!({
             resource: "post",
             variables: [
                 {
@@ -73,7 +73,7 @@ describe("createMany", () => {
     it("throw error as id dont exists ", async () => {
         expect.assertions(2);
         try {
-            await dataProvider(client).createMany({
+            await dataProvider(client).createMany!({
                 resource: "unknown",
                 variables: [
                     {
@@ -350,7 +350,7 @@ describe("getMany", () => {
     });
 
     it("correct response", async () => {
-        const { data } = await dataProvider(client).getMany({
+        const { data } = await dataProvider(client).getMany!({
             resource: "post",
             ids: ["99", "98"], metaData: {}
         });
@@ -365,7 +365,7 @@ describe("getMany", () => {
     it("throw error as id dont exists ", async () => {
         expect.assertions(2);
         try {
-            await dataProvider(client).getMany({
+            await dataProvider(client).getMany!({
                 resource: "unknown",
                 ids: ["99", "98"],
             });
@@ -448,7 +448,7 @@ describe("updateMany", () => {
         ]);
     });
     it("correct response with metaData", async () => {
-        const { data } = await dataProvider(client).updateMany({
+        const { data } = await dataProvider(client).updateMany!({
             resource: "post",
             ids: ["2", "3"],
             variables: {
@@ -465,7 +465,7 @@ describe("updateMany", () => {
     it("throw error as id dont exists ", async () => {
         expect.assertions(2);
         try {
-            await dataProvider(client).updateMany({
+            await dataProvider(client).updateMany!({
                 resource: "unknown",
                 ids: ["2", "3"],
                 variables: {
@@ -530,7 +530,7 @@ describe("delete", () => {
     });
 
     it("softDelete delete many default", async () => {
-        const { data } = await dataProvider(client).deleteMany({
+        const { data } = await dataProvider(client).deleteMany!({
             resource: "post",
             ids: ["62", "61"],
             metaData: {
@@ -547,7 +547,7 @@ describe("delete", () => {
     });
 
     it("softDelete delete many custom", async () => {
-        const { data } = await dataProvider(client).deleteMany({
+        const { data } = await dataProvider(client).deleteMany!({
             resource: "post",
             ids: ["62", "61"],
             metaData: {
@@ -572,7 +572,7 @@ describe("delete", () => {
         expect(data).toBe(undefined);
     });
     it("correct response with metaData", async () => {
-        const { data } = await dataProvider(client).deleteMany({
+        const { data } = await dataProvider(client).deleteMany!({
             resource: "post",
             ids: ["61"],
         });
@@ -597,7 +597,7 @@ describe("delete", () => {
     it("throw error as id dont exists ", async () => {
         expect.assertions(2);
         try {
-            await dataProvider(client).deleteMany({
+            await dataProvider(client).deleteMany!({
                 resource: "unknown",
                 ids: ["987"],
             });
