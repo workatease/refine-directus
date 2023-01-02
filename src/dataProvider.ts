@@ -1,4 +1,4 @@
-import { CrudFilters, CrudSorting, DataProvider,CrudOperators } from "@pankod/refine-core";
+import { CrudFilters, CrudSorting, DataProvider,CrudOperators, LogicalFilter } from "@pankod/refine-core";
 import { IDirectus } from '@directus/sdk';
 import { CustomTypes } from "./helpers/interface";
 type DirectusFilterOperators='_eq'|'_neq'|
@@ -31,7 +31,7 @@ const operators: Record<CrudOperators, DirectusFilterOperators | undefined>= {
     endswith: "_ends_with",
     nendswith: "_nends_with",startswiths:undefined,
     nstartswiths:undefined, endswiths:undefined, nendswiths:undefined,
-    or:undefined,
+    or:undefined,and:undefined
 };
 
 type Fields<T> = keyof T | (keyof T)[] | '*' | '*.*' | '*.*.*' | string | string[];
@@ -68,8 +68,12 @@ const generateFilter = (filters?: CrudFilters) => {
     let search: string = '';
     if (filters) {
         queryFilters['_and'] = [];
-        filters.map((filter) => {
-            if (filter.operator !== "or") {
+        filters.map((filter) => {            
+                if (
+                    filter.operator !== "or" &&
+                    filter.operator !== "and" &&
+                    "field" in filter
+                ) {
                 const { field, operator, value } = filter;
 
                 if (value) {
@@ -90,7 +94,7 @@ const generateFilter = (filters?: CrudFilters) => {
                 const queryOrFilters: { [key: string]: any } = {};
                 queryOrFilters['_or'] = [];
                 value.map((item) => {
-                    const { field, operator, value } = item;
+                    const { field, operator, value } = item as LogicalFilter;
                     const directusOperator = operators[operator];
                     let queryField = `${field}.${directusOperator}`;
                     let filterObj = strToObj(queryField, value);

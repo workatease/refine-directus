@@ -6,9 +6,12 @@ describe("authProvider", () => {
 
     it("correct response", async () => {
         const response = await authProvider(noAuthDirectus).login({ username: "jest@test.com", password: "test" });
-        const resPayload = jwt.decode(response as string, { json: true });
-        // expect(response).toBeInstanceOf(String);
-        expect(resPayload!.iss).toBe("directus")
+        expect(response).toBe("/");
+    });
+
+    it("correct response with redirectPath", async () => {
+        const response = await authProvider(noAuthDirectus).login({ username: "jest@test.com", password: "test", redirectPath: "/login" });
+        expect(response).toBe("/login");
     });
 
     it("error response", async () => {

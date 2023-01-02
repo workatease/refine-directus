@@ -22,6 +22,15 @@ see below notes for more information.
 npm install @workatease/refine-directus
 ```
 
+Version compatible with refine-core
+------------------------------------------------
+| refine-core version | refine-directus version |
+| ------------------- | ----------------------- |
+| 3.84.0 or before    | 1.0.11                  |
+| 3.85.0 after        | 1.0.12                  |
+------------------------------------------------
+
+
 ## Example
 Use below login details in example<br />
 username: demo@demo.com<br />
@@ -88,7 +97,13 @@ example:
 - ~~automate integration with directus server~~
 
 
-### Changesets
+### Change Log
+#### 1.0.12
+- update library version
+  - "@directus/sdk": "^10.3.1"
+  - "@pankod/refine-core": "3.90.6"
+- Auth provider to redirect with the default redirect url
+
 #### 1.0.11
 - Added rnd value to the url to avoid caching issue in Auth provider
 ----------------
